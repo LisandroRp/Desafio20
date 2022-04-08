@@ -13,7 +13,7 @@ class ProductService extends ProductDao {
     }
 
     async getById(id) {
-        return super.getById(id)
+        return super.getById(id) 
             .then((product) => {
                 if (product.length) { return renameField(asPOJO(product[0]), '_id', 'id') }
                 else { throw exceptionFactory.throwException(404, "No existe el producto con id: " + id, "No existe el producto con id: " + id) }
