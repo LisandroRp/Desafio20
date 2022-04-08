@@ -1,7 +1,6 @@
-class Product {
+class ProductDto {
     constructor(product) {
-        this.id = product.id ? product.id : 1;
-        this.timestamp = new Date().toLocaleTimeString();
+        this.timestamp = product.timestamp;
         this.name = product.name ? product.name : "";
         this.description = product.description ? product.description : "",
         this.sku = product.sku ? product.sku : "",
@@ -11,4 +10,4 @@ class Product {
     }
 }
 
-export default Product;
+export default ProductDto

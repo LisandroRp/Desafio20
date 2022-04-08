@@ -1,12 +1,14 @@
 import { createTransport } from 'nodemailer';
 import twilio from "twilio";
-import ServiceException from "../src/exceptions/ServiceException.js"
+import ExceptionFactory from "../src/factory/ExceptionFactory.js"
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID || "AC795bc029cf78d374baf92dbc627e149a";
 const authToken = process.env.TWILIO_AUTH_TOKEN || "2a511a340ef8350cf4126f9e69510f36";
 const client = twilio(accountSid, authToken);
 const TEST_MAIL = process.env.ADMINEMAIL || "lisandrorp1997@gmail.com";
 const TEST_NUMBER = process.env.ADMINNUMBER || "+5491144373492";
+
+const exceptionFactory = new ExceptionFactory();
 
 /* const transporter = createTransport({
     name: 'example.com',
@@ -57,7 +59,7 @@ const transporter = createTransport({
 
 const sendEmail = async (subject, body) => {
     let mail = {
-        from: '"Fred Foo 👻" <foo@example.com>', // sender address
+        from: 'ecommerce@gmail.com', // sender address
         to: TEST_MAIL, // list of receivers
         subject: subject, // Subject line
         text: "body", // plain text body
@@ -73,7 +75,7 @@ const sendEmail = async (subject, body) => {
     catch (error) {
         console.log("mal")
         console.log(error)
-        throw new ServiceException(error.error, "No se pudieron traer los productos", error.message)
+        throw exceptionFactory.throwException(error.error, "No se pudieron traer los productos", error.message)
     }
 }
 
@@ -88,7 +90,7 @@ const sendWpp = async (body) => {
         .catch(error => {
             console.log("mal")
             console.log(error)
-            throw new ServiceException(error.error, "No se pudieron traer los productos", error.message)
+            throw exceptionFactory.throwException(error.error, "No se pudieron traer los productos", error.message)
         })
 }
 

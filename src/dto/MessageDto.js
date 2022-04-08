@@ -1,9 +1,6 @@
 import mongoose from 'mongoose'
-import config from '../../options/config.js'
 
-await mongoose.connect(config.mongodb.cnxStr, config.mongodb.options)
-
-class UserService {
+class MessageDao {
 
     constructor(nombreColeccion, esquema) {
         this.coleccion = mongoose.model(nombreColeccion, esquema, nombreColeccion)
@@ -13,20 +10,16 @@ class UserService {
         return this.coleccion.find({ '_id': id })
     }
 
-    getByUsername(username) {
-        return this.coleccion.find({ 'username': username })
-    }
-
     getAll() {
         return this.coleccion.find({}).lean()
     }
 
-    save(user) {
-        return this.coleccion.create(user)
+    save(product) {
+        return this.coleccion.create(product)
     }
 
-    update(user) {
-        return this.coleccion.replaceOne({ '_id': user.id }, user)
+    update(product) {
+        return this.coleccion.replaceOne({ '_id': product.id }, product)
     }
 
     deleteById(id) {
@@ -37,4 +30,4 @@ class UserService {
         return this.coleccion.deleteMany({})
     }
 }
-export default UserService
+export default MessageDao

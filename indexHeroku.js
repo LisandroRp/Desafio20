@@ -1,4 +1,4 @@
-import ServiceException from "./src/exceptions/ServiceException.js"
+import ExceptionFactory from "./src/factory/ExceptionFactory.js"
 /* import config from './options/config.js'
 import parseArgs from "minimist";
 import { fork } from 'child_process' */
@@ -90,6 +90,6 @@ app.set('view engine', 'handlebars')
 
 /* app.use((req, res) => {
     res.status(404);
-    res.json(new ServiceException(-2, `Ruta ${req.originalUrl} método ${req.method} no implementada.`))
+    res.json(exceptionFactory.throwException(-2, `Ruta ${req.originalUrl} método ${req.method} no implementada.`))
 })     */
 

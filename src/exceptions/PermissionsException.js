@@ -1,5 +1,3 @@
-
-
 class PermissionsException extends Error{
     constructor(error, message){
         super();
